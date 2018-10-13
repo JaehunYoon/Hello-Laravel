@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('test', function() {
+    return "test is good!";
+});
+
+// Route::[Method]('[Resource', function() {[this is call back function]});
+// * Method
+// - get
+// - post
+// - put
+// - delete
