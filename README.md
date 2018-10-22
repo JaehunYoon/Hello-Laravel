@@ -57,3 +57,46 @@ Route::get('/', function () {
 # php artisan up 명령으로 서비스 상태로 복귀할 수 있다.
 # php artisan suspend 명령은 서비스를 완전히 종료시킨다.
 ```
+
+---
+
+### Data Binding in view
+
+```php
+<p>
+    {{ $greeting }} {{ $name or '' }}. Nice to meet you~~
+</p>
+
+# resources/views/ 경로에 hello.blade.php 파일을 생성하였음.
+# {{ }} 은 라라벨의 템플릿 엔진인 블레이드에서 사용하는 String interpolation 문법이다.
+# PHP로 치면, 뷰 내에서 <?= ?> 과 같은 역할을 해준다.
+
+# 특수문자가 포함된 데이터를 뷰에 바인딩시킬 때에는 {{ }} 대신 {!! !!} 를 사용한다.
+```
+
+데이터를 바인딩 하는 법에는 여러 가지 방법이 있다.
+
+`with()` 메소드로 뷰에 데이터 바인딩하는 방법, `view()`의 2번째 인자로 데이터를 넘기는 방법 등이 있는데,
+
+실전에서는 PHP 내장함수인 `compact(mixed $varname)`와 조합하여 데이터 바인딩을 진행하는 편이다.
+
+#### compact(mixed $varname)
+
+compact 함수는 변수를 이용하여 연관배열을 만드는 함수이다.
+
+변수명은 Key 값으로, 변수값은 배열값으로 바뀐다.
+
+* [PHP.net compact()](http://php.net/manual/kr/function.compact.php)
+
+반대로 연관배열을 변수로 전환해주는 함수는 `extract()` 이다.
+
+* [PHP.net extract()](http://php.net/manual/kr/function.extract.php)
+
+```php
+Route::get('/hello', function () {
+    $greeting = '안녕하세요';
+    $name = 'h4lo';
+
+    return view('hello', compact('greeting', 'name'));
+});
+```
