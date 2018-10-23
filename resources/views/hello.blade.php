@@ -5,7 +5,7 @@
 </head>
 <body>
     <p>
-        {{ $greeting }} {{ $name }}님. 환영합니다~
+        {{ $greeting }} {{ $name ?? '' }}님. 환영합니다~
     </p>
 </body>
 </html>

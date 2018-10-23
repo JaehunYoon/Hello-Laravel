@@ -64,7 +64,7 @@ Route::get('/', function () {
 
 ```php
 <p>
-    {{ $greeting }} {{ $name or '' }}. Nice to meet you~~
+    {{ $greeting }} {{ $name ?? '' }}. Nice to meet you~~
 </p>
 
 # resources/views/ 경로에 hello.blade.php 파일을 생성하였음.
@@ -72,6 +72,9 @@ Route::get('/', function () {
 # PHP로 치면, 뷰 내에서 <?= ?> 과 같은 역할을 해준다.
 
 # 특수문자가 포함된 데이터를 뷰에 바인딩시킬 때에는 {{ }} 대신 {!! !!} 를 사용한다.
+# {{ $name ?? '' }} 에서 ??는 PHP7 이후부터 나온 문법으로, $name에 값이 존재하면 $name을,
+# 아니라면 공백을 사용하는 삼항연산자의 역할을 한다. PHP5.3 에서는 ?:로 사용하고 있었다.
+# or를 사용하는 예제도 있으나 or를 사용할 경우 name 값 대신 1이 출력된다.
 ```
 
 데이터를 바인딩 하는 법에는 여러 가지 방법이 있다.
@@ -100,3 +103,9 @@ Route::get('/hello', function () {
     return view('hello', compact('greeting', 'name'));
 });
 ```
+
+routes/web.php 파일에 다음과 같은 라우팅 메소드를 추가한다.
+
+`hello.blade.php`에 view 메소드의 두번째 인자에서 compact 함수로 만들어진 연관배열을 파라미터 값으로 넘겨, html 코드에 데이터를 바인딩한다.
+
+ 
