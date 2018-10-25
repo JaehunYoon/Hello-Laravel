@@ -21,9 +21,14 @@ Route::get('test', function()
     return "test is good!";
 });
 
-Route::get('err', function() # 이 라우팅은 errors 파일을 정상적으로 불러오지 못하기 때문에 오류가 발생한다.
+Route::get('err_404', function()
 {
-    return view('errors'); # 없는데 어떻게 view 를 해요..
+    return abort(404);
+});
+
+Route::get('err_500', function()
+{
+    return abort(500);
 });
 
 Route::get('/hello', function () {

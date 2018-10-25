@@ -50,7 +50,7 @@ return View::make('welcome');
 
 ```php
 Route::get('/', function () {
-    return view('errors.503');
+    return abort(503);
 });
 
 # php artisan down 명령으로 유지보수 상태로 전환하면, 위와 같은 503 Error를 뷰로써 보여준다.
