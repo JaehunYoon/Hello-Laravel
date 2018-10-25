@@ -1,6 +1,20 @@
 # Hello-Laravel
 👍👍Lets study Laravel PHP Framework!!👍👍
 
+## Index
+
+* [Routing](#routing)
+    - [Routing Manual](#routing-manual)
+* [Data Binding in View](#data-binding-in-view)
+    - [PHP compact function](#compactmixed-varname)
+* [Blade 101](#blade-101)
+    - [{{ }} - String interpolation](#--string-interpolation)
+    - [{{-- --}} - Comment](#------comment)
+    - [@foreach](#foreach)
+    - [@if](#if)
+    - [@forelse](#forelse)
+ 
+
 ## Routing
 
 Laravel Framework는 Front Controller 방식의 라우팅을 사용한다.
@@ -15,6 +29,7 @@ Request -> [Routing File] -> 임의의 컨트롤러
 # 컨트롤러는 Laravel에서 제공하는 컨트롤러도 있지만, 직접 만들어서 사용하는 경우가 많다.
 # Request가 들어오면 라우팅 파일을 보면 된다라고 생각하자!
 ```
+[\[목차로\]](#index)
 
 ### Routing Manual
 
@@ -60,7 +75,7 @@ Route::get('/', function () {
 
 ---
 
-### Data Binding in view
+## Data Binding in view
 
 ```php
 <p>
@@ -83,7 +98,7 @@ Route::get('/', function () {
 
 실전에서는 PHP 내장함수인 `compact(mixed $varname)`와 조합하여 데이터 바인딩을 진행하는 편이다.
 
-#### compact(mixed $varname)
+### compact(mixed $varname)
 
 compact 함수는 변수를 이용하여 연관배열을 만드는 함수이다.
 
@@ -108,4 +123,84 @@ routes/web.php 파일에 다음과 같은 라우팅 메소드를 추가한다.
 
 `hello.blade.php`에 view 메소드의 두번째 인자에서 compact 함수로 만들어진 연관배열을 파라미터 값으로 넘겨, html 코드에 데이터를 바인딩한다.
 
- 
+[\[목차로\]](#index)
+
+## Blade 101
+
+Laravel Template Engine, Blade
+
+블레이드 문법은 블레이드 엔진에 의해 PHP 코드로 컴파일된다.
+
+### `{{ }}` String interpolation
+
+```php
+<html>
+{{ $example }}  # 라우팅에서 리턴한 $example 변수의 데이터를 바인딩 시켜준다.
+<html>
+
+# 출력 : Test is good!
+---
+
+Route::get('/', function ()
+{
+    $example = "Test is good!"
+    
+    return view('exam', compact('example'));
+});
+```
+
+### `{{-- --}}` Comment
+
+```php
+{{-- count(range(1, 10)) --}}  # 함수가 작동하지 않는 미출력 코드.
+
+<!-- {{ count(range(1, 10)) }} -->
+# 페이지 소스보기를 하면 count(range(1, 10)) 함수는 실행되어 <!-- 10 --> 과 같이 값이 바뀐 것을 알 수 있다.
+```
+
+### @foreach
+
+```php
+<ul>
+    @foreach($items as $item)
+        <li>{{ $item }}</li>
+    @endforeach
+</ul>
+
+# blade.php 파일에 다음과 같이 html 코드 상에 @foreach를 사용하게 되면, 리턴받은 연관배열의 크기만큼 foreach 문이 반복된다.
+```
+
+`@for`도 사용 가능!
+
+### @if
+
+```php
+@if(isset($test))
+    <p>H4lo!!</p>
+@else
+    <p>Null!!</p>
+@endif
+
+# if 문은 다음과 같이 사용 가능하다.
+# @elseif 도 가능
+# @unless (== if(!)) 도 사용 가능 
+```
+
+**리턴받은 데이터로 ArrayAccess를 할 수 없다면 어떻게 처리하지?**
+
+`@forelse` 를 사용해보자!
+
+### @forelse
+
+forelse는 foreach와 if를 섞은 느낌!
+
+리턴받은 변수에 값이 있고 ArrayAccess가 가능하면, `@forelse` 문으로 들어가고, 그렇지 않으면 `@empty` 경로를 타게 된다.
+```php
+@forelse($items as $item)
+    <p>{{ $item }}</p>
+@empty
+    <p>Empty..</p>
+@endforelse
+```
+
+[\[목차로\]](#index)

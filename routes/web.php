@@ -31,11 +31,21 @@ Route::get('err_500', function()
     return abort(500);
 });
 
-Route::get('/hello', function () {
+Route::get('/hello', function ()
+{
     $greeting = '안녕하세요';
     $name = 'h4lo';
 
     return view('hello', compact('greeting', 'name'));
+});
+
+Route::get('/blade/101', function ()
+{
+    $items = ['Apple', 'Banana'];
+    $itemCount = "2";
+    $exam = "I love Laravel!!";
+
+    return view('blade101', compact('items', 'exam', 'itemCount'));
 });
 /*
 
