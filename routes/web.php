@@ -47,6 +47,12 @@ Route::get('/blade/101', function ()
 
     return view('blade101', compact('items', 'exam', 'itemCount'));
 });
+
+Route::get('/blade/201', function ()
+{
+   return view('blade201');
+});
+
 /*
 
 - Route::[Method]('[Resource', function() {[this is call back function]});

@@ -13,6 +13,9 @@
     - [@foreach](#foreach)
     - [@if](#if)
     - [@forelse](#forelse)
+* [Blade 201](#blade-201)
+    - [@yield, @extends, @section](#yield-extends-section)
+    - [@include](#include)
  
 
 ## Routing
@@ -201,6 +204,80 @@ forelse는 foreach와 if를 섞은 느낌!
 @empty
     <p>Empty..</p>
 @endforelse
+```
+
+[\[목차로\]](#index)
+
+## Blade 201
+
+Master Layout in Laravel
+
+페이지마다 반복되는 Header, Section, Footer를 간편하게 넣기 위해 사용할 수 있는 Blade 문법에 대해 알아보자~
+
+### @yield, @extends, @section
+
+```php
+resources/views/master.blade.php
+
+<!DOCTYPE HTML>
+<html lang='ko'>
+<head>
+    <meta charset='utf-8'>
+    <title>Blade 201 example</title>
+</head>
+<body>
+    @yield('style')
+    @yield('content')
+    @yield('script')
+</body>
+</html>
+```
+
+```php
+resources/views/blade201.blade.php
+
+@extends('master')
+
+@section('style')
+    <style>
+        body {background : lightskyblue;}
+    </style>
+@stop
+
+@section('content')
+    H4lo~~
+@stop
+
+@section('script')
+    <script>
+        alert('H4lo~~ Nice to meet you~~')
+    </script>
+@stop
+```
+
+[\[목차로\]](#index)
+
+### @include
+
+Footer 태그를 include 해보자!
+
+```php
+resources/views/footer.blade.php
+
+<footer>
+    <p>This is footer area</p>
+</footer>
+```
+
+```php
+resources/views/master.blade.php
+
+@yield('style')
+@yield('content')
+@yield('script')
+
+@include('footer') # footer
+
 ```
 
 [\[목차로\]](#index)
