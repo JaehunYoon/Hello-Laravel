@@ -242,17 +242,17 @@ resources/views/blade201.blade.php
     <style>
         body {background : lightskyblue;}
     </style>
-@stop
+@endsection
 
 @section('content')
     H4lo~~
-@stop
+@endsection
 
 @section('script')
     <script>
         alert('H4lo~~ Nice to meet you~~')
     </script>
-@stop
+@endsection
 ```
 
 [\[목차로\]](#index)

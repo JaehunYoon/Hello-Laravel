@@ -36,21 +36,26 @@ Route::get('/hello', function ()
     $greeting = '안녕하세요';
     $name = 'h4lo';
 
-    return view('hello', compact('greeting', 'name'));
+    return view('Example.DataBinding.hello', compact('greeting', 'name'));
 });
 
-Route::get('/blade/101', function ()
+Route::get('/blade/101/', function ()
 {
     $items = ['Apple', 'Banana'];
     $itemCount = "2";
     $exam = "I love Laravel!!";
 
-    return view('blade101', compact('items', 'exam', 'itemCount'));
+    return view('Example.101.blade101', compact('items', 'exam', 'itemCount'));
 });
 
-Route::get('/blade/201', function ()
+Route::get('/blade/201/master', function ()
 {
-   return view('blade201');
+   return view('Example.201.master');
+});
+
+Route::get('/blade/201/', function ()
+{
+    return view('Example.201.blade201');
 });
 
 /*

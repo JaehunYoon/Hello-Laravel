@@ -8,22 +8,28 @@
     <title>Laravel</title>
 </head>
 <body>
-    @extends('master')
+    @extends('Example.201.master')
 
     @section('style')
         <style>
             body {background : lightskyblue;}
         </style>
-    @stop
+    @endsection
 
-    @section('content')
-        Your content here!!
-    @stop
+    @section('title', 'Laravel with h4lo')
+    @yield('sidebar')
+    <p>This is child sidebar.</p>
+
+    <div class="container">
+        @section('content')
+            Your content here!!
+        @endsection
+    </div>
 
     @section('script')
         <script>
             alert("H4lo~~ It's Blade 201 example :D");
         </script>
-    @stop
+    @endsection
 </body>
 </html>
