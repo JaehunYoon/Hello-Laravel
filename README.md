@@ -17,7 +17,11 @@
     - [@yield, @extends, @section](#yield-extends-section)
     - [@include](#include)
  
-
+* [DB Query with Artisan Tinker](#db-query-with-artisan-tinker)
+    - [select](#select)
+    - [insert](#insert)
+    - [update](#update)
+    - [SQLSTATE\[HY000\] \[2002\] Connection refused Error](#sqlstatehy000-2002-connection-refused-error)
 ## Routing
 
 Laravel Framework는 Front Controller 방식의 라우팅을 사용한다.
@@ -79,7 +83,7 @@ Route::get('/', function () {
 
 ## Data Binding in view
 
-```php
+```
 <p>
     {{ $greeting }} {{ $name ?? '' }}. Nice to meet you~~
 </p>
