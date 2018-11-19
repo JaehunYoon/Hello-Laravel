@@ -32,7 +32,6 @@ Request -> [Routing File] -> 임의의 컨트롤러
 # 컨트롤러는 Laravel에서 제공하는 컨트롤러도 있지만, 직접 만들어서 사용하는 경우가 많다.
 # Request가 들어오면 라우팅 파일을 보면 된다라고 생각하자!
 ```
-[\[목차로\]](#index)
 
 ### Routing Manual
 
@@ -255,8 +254,6 @@ resources/views/blade201.blade.php
 @endsection
 ```
 
-[\[목차로\]](#index)
-
 ### @include
 
 Footer 태그를 include 해보자!
@@ -279,5 +276,61 @@ resources/views/master.blade.php
 @include('footer') # footer
 
 ```
+
+[\[목차로\]](#index)
+
+## DB Query with Artisan Tinker 
+
+### select
+
+```
+$ php artisan tinker
+```
+
+```
+>>> DB::select('select * from [Table Name]')
+=> [
+     {#(id value)
+       +"Key1": value,
+       +"Key2": value,
+       +"Key3": value,
+       +"Key4": value.
+     },
+   ]
+```
+
+### insert
+
+```
+$ php artisan tinker
+```
+
+```
+>>> DB::insert('insert into [Table Name] (column1, column2) values (?, ?)', [value1, value2]);
+=> true
+```
+
+`Laravel`은 `PDO`를 이용하기 때문에 데이터 바인딩은 직접 값을 대입하지 않고, `?`를 이용한 뒤, 두번째 파라미터 값으로 데이터를 바인딩 시켜준다.
+
+### update
+
+```
+$ php artisan tinker
+```
+
+```
+>>> DB::update('update [Table Name] set (column1, column2) values (?, ?)', [value1, value2]);
+=> 1
+```
+
+etc..
+
+### SQLSTATE\[HY000\] \[2002\] Connection refused Error
+
+`Laravel` 내의 `.env` 파일과 `config/database.php` 파일의 데이터베이스 정보가 일치하지 않거나 문제가 있을 경우 다음과 같은 에러를 보이고 `Artisan Tinker` 내에서 정상적으로 DB 쿼리를 수행할 수 없다.
+
+기본적으로 `config/database.php` 파일 내의 mysql port는 33060으로 설정이 되어있었던 것으로 기억된다.
+
+`Homestead` 에서 mysql port를 33060으로 사용하기는 하나, 이 문제를 해결하기 위해서는 `config.database.php`의 mysql port 설정란에 `'port' => env('DB_PORT', '3306')` 와 같이 설정해준 후 `php artisan cache:clear` 로 캐시를 초기화 시켜주면 정상적으로 `tinker` 내에서 DB 쿼리를 수행할 수 있다.
 
 [\[목차로\]](#index)
