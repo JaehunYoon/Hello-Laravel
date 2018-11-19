@@ -338,3 +338,5 @@ etc..
 `Homestead` 에서 mysql port를 33060으로 사용하기는 하나, 이 문제를 해결하기 위해서는 `config.database.php`의 mysql port 설정란에 `'port' => env('DB_PORT', '3306')` 와 같이 설정해준 후 `php artisan cache:clear` 로 캐시를 초기화 시켜주면 정상적으로 `tinker` 내에서 DB 쿼리를 수행할 수 있다.
 
 [\[목차로\]](#index)
+
+## Query Builder
