@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function ()
-{
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
 
 Route::get('test', function()
 {
@@ -57,6 +54,8 @@ Route::get('/blade/201/', function ()
 {
     return view('Example.201.blade201');
 });
+
+Route::resource('posts', 'PostsController');
 
 /*
 
