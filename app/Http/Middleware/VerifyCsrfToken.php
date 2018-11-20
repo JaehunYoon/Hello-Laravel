@@ -19,6 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+//        'posts',
+//        'posts/*'
+//    CSRF 공격 방지를 예외처리해주기 위해서는 $except 내에 다음과 같이 URI 리소스를 추가해주면 된다.
     ];
 }
