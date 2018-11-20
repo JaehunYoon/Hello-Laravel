@@ -57,6 +57,23 @@ Route::get('/blade/201/', function ()
 
 Route::resource('posts', 'PostsController');
 
+Route::get('posts', [
+    'as' => 'posts.index',
+    'uses' => 'PostsController@index'
+]);
+
+/*
+    * Named Route
+    - Closure
+
+    Route::get('posts', [
+        'as' => 'posts.index',
+        function() {
+            return view('posts.index');
+        }
+    ]);
+*/
+
 /*
 
 - Route::[Method]('[Resource', function() {[this is call back function]});
