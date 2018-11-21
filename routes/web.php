@@ -91,12 +91,25 @@ Route::get('auth', function () {
    return redirect('protected');
 });
 
+Route::get('auth/login', ['as' => 'login', function () {
+    return "Hello~~ It's Login Page~~~";
+    }
+]);
+
 Route::get('auth/logout', function () {
    Auth::logout();
 
    return 'Bye~~';
 });
 
+Route::get('protected', [
+   'middleware' => 'auth',
+    function () {
+        return 'Welcome back, ' . Auth::user()->name;
+    }
+]);
+
+/*
 Route::get('protected', function () {
    if (!Auth::check()) {
        return '잘못된 접근입니다!';
@@ -104,6 +117,7 @@ Route::get('protected', function () {
 
     return 'Welcome back, ' . Auth::user()->name;
 });
+*/
 
 /*
 
