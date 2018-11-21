@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function posts() {
+        return $this->hasMany('App\Post');
+        // "$this(App\User) 는 여러 개의 App\Post를 가질 수 있다" 라는 의미?
+    }
 }
