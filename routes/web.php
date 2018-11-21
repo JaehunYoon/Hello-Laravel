@@ -62,6 +62,8 @@ Route::get('posts', [
     'uses' => 'PostsController@index'
 ]);
 
+Route::resource('posts.comments', 'PostCommentController');
+
 /*
     * Named Route
     - Closure
