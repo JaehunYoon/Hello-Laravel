@@ -13,21 +13,6 @@
 
 Route::get('/', 'IndexController@index');
 
-Route::get('test', function()
-{
-    return "test is good!";
-});
-
-Route::get('err_404', function()
-{
-    return abort(404);
-});
-
-Route::get('err_500', function()
-{
-    return abort(500);
-});
-
 Route::get('/hello', function ()
 {
     $greeting = '안녕하세요';
@@ -78,6 +63,7 @@ Route::resource('posts.comments', 'PostCommentController');
 
 // Authentication Example
 
+/*
 Route::get('auth', function () {
    $credentials = [
        'email' => 'foo@bar.com',
@@ -108,20 +94,26 @@ Route::get('protected', [
         return 'Welcome back, ' . Auth::user()->name;
     }
 ]);
-
-/*
-Route::get('protected', function () {
-   if (!Auth::check()) {
-       return '잘못된 접근입니다!';
-   }
-
-    return 'Welcome back, ' . Auth::user()->name;
-});
 */
+
+// Authentication
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 
 /*
 
 - Route::[Method]('[Resource', function() {[this is call back function]});
  -> Method : get, post, put, delete
 
+*/
+
+// Return HTTP Exception
+
+/*
+return abort(HTTP response status code value)
+ex) return abort(404)
+    -> show 404 page
 */
