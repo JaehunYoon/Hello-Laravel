@@ -76,6 +76,35 @@ Route::resource('posts.comments', 'PostCommentController');
     ]);
 */
 
+// Authentication Example
+
+Route::get('auth', function () {
+   $credentials = [
+       'email' => 'foo@bar.com',
+       'password' => 'password'
+   ];
+
+   if (!Auth::attempt($credentials)) {
+       return '아이디와 비밀번호가 일치하지 않습니다.';
+   }
+
+   return redirect('protected');
+});
+
+Route::get('auth/logout', function () {
+   Auth::logout();
+
+   return 'Bye~~';
+});
+
+Route::get('protected', function () {
+   if (!Auth::check()) {
+       return '잘못된 접근입니다!';
+   }
+
+    return 'Welcome back, ' . Auth::user()->name;
+});
+
 /*
 
 - Route::[Method]('[Resource', function() {[this is call back function]});
