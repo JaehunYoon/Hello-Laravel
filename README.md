@@ -270,6 +270,7 @@ resources/views/footer.blade.php
 </footer>
 ```
 
+
 ```php
 resources/views/master.blade.php
 
@@ -280,6 +281,8 @@ resources/views/master.blade.php
 @include('footer') # footer
 
 ```
+
+**`@extends`로 명시해놓은 경로의 파일이 존재하지 않을 경우 500 에러가 발생!!**
 
 [\[목차로\]](#index)
 
