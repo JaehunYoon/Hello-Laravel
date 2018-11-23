@@ -40,14 +40,10 @@ Route::get('/blade/201/', function ()
     return view('Example.201.blade201');
 });
 
-Route::resource('posts', 'PostsController');
+// Controller Route
 
-Route::get('posts', [
-    'as' => 'posts.index',
-    'uses' => 'PostsController@index'
-]);
-
-Route::resource('posts.comments', 'PostCommentController');
+//Route::resource('posts', 'PostsController');
+//Route::resource('posts.comments', 'PostCommentController');
 
 /*
     * Named Route
@@ -61,46 +57,34 @@ Route::resource('posts.comments', 'PostCommentController');
     ]);
 */
 
-// Authentication Example
-
-/*
-Route::get('auth', function () {
-   $credentials = [
-       'email' => 'foo@bar.com',
-       'password' => 'password'
-   ];
-
-   if (!Auth::attempt($credentials)) {
-       return '아이디와 비밀번호가 일치하지 않습니다.';
-   }
-
-   return redirect('protected');
-});
-
-Route::get('auth/login', ['as' => 'login', function () {
-    return "Hello~~ It's Login Page~~~";
-    }
-]);
-
-Route::get('auth/logout', function () {
-   Auth::logout();
-
-   return 'Bye~~';
-});
-
-Route::get('protected', [
-   'middleware' => 'auth',
-    function () {
-        return 'Welcome back, ' . Auth::user()->name;
-    }
-]);
-*/
-
 // Authentication
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Eager Loading
+
+Route::get('posts', function () {
+    DB::listen(function ($event) {
+        var_dump($event->sql);
+//        var_dump($event->bindings);
+//        var_dump($event->time);
+    });
+
+    $posts = App\Post::get();
+//    $posts->load('user');
+
+    return view('posts.index', compact('posts'));
+});
+
+// Paging
+
+//Route::get('users', function () {
+//    $users = DB::table('users')->paginate(10);
+//
+//    return view('users.index', compact($users));
+//});
 
 
 /*
