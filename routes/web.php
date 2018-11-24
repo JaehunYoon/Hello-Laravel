@@ -72,8 +72,9 @@ Route::get('posts', function () {
 //        var_dump($event->time);
     });
 
-    $posts = App\Post::get();
-//    $posts->load('user');
+//    $posts = App\Post::get();
+    $posts = App\Post::with('user')->get();
+    $posts->load('user');
 
     return view('posts.index', compact('posts'));
 });
