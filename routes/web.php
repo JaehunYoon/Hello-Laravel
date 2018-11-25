@@ -63,18 +63,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Eager Loading
+// Eager Loading, Paging
 
 Route::get('posts', function () {
-    DB::listen(function ($event) {
-        var_dump($event->sql);
+//    DB::listen(function ($event) {
+//        var_dump($event->sql);
 //        var_dump($event->bindings);
 //        var_dump($event->time);
-    });
+//    });
 
 //    $posts = App\Post::get();
-    $posts = App\Post::with('user')->get();
-    $posts->load('user');
+    $posts = App\Post::with('user')->paginate(10);
+//    $posts->load('user');
 
     return view('posts.index', compact('posts'));
 });
