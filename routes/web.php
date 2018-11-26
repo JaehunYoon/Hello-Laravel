@@ -79,13 +79,21 @@ Route::get('posts', function () {
     return view('posts.index', compact('posts'));
 });
 
-// Paging
+// Send Mail
 
-//Route::get('users', function () {
-//    $users = DB::table('users')->paginate(10);
-//
-//    return view('users.index', compact($users));
-//});
+Route::get('mail', function() {
+    $to = 'goodasd123@naver.com';
+    $subject = 'Studying sending email in Laravel';
+    $data = [
+        'title' => 'Hi there',
+        'body' => 'This is the body of an email message',
+        'user' => App\User::find(1)
+    ];
+
+    return Mail::send('emails.welcome', $data, function ($message) use($to, $subject) {
+        $message->to($to)->subject($subject);
+    });
+});
 
 
 /*
