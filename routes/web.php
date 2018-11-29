@@ -65,6 +65,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Eager Loading, Paging
 
+/*
 Route::get('posts', function () {
 //    DB::listen(function ($event) {
 //        var_dump($event->sql);
@@ -78,6 +79,7 @@ Route::get('posts', function () {
 
     return view('posts.index', compact('posts'));
 });
+*/
 
 // Send Mail
 
@@ -93,6 +95,43 @@ Route::get('mail', function() {
     return Mail::send('emails.welcome', $data, function ($message) use($to, $subject) {
         $message->to($to)->subject($subject);
     });
+});
+
+Route::get('auth', function () {
+    $credentials = [
+        'email' => 'jaehun@h4lo.kr',
+        'password' => 'password'
+    ];
+
+    if (!Auth::attempt($credentials)) {
+        return 'Incorrect username and password combination';
+    }
+
+    Event::fire('user.login', function ($user) {
+        var_dump('"user.log" event catched and passed data is :');
+        var_dump($user->toArray());
+    });
+});
+
+# Validation
+
+Route::post('posts', function (\Illuminate\Http\Request $request) {
+    $rule = [
+        'title' => ['required'],
+        'body' => ['required', 'min:10'],
+    ];
+
+    $validator = Validator::make($request->all(), $rule);
+
+    if ($validator->fails()) {
+        return redirect('posts/create')->withErrors($validator)->withInput();
+    }
+
+    return 'Valid & proceed to next job~~';
+});
+
+Route::get('posts/create', function () {
+    return view('posts/create');
 });
 
 
