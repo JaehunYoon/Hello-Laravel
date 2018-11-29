@@ -28,6 +28,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $dates = ['last_login'];
+
     public function posts() {
         return $this->hasMany('App\Post');
         // "$this(App\User) 는 여러 개의 App\Post를 가질 수 있다" 라는 의미?
