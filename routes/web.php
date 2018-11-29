@@ -146,6 +146,33 @@ Route::get('/excepts/mnf', function () {
     return App\Post::findOrFail(100);
 });
 
+# parsedown-extra Markdown Example
+
+Route::get('/md', function () {
+    $text =<<<EOT
+# Mardown Example
+
+마크다운 문법이 잘 적용되나요? 참고로 이는 `Heredoc` 문법을 사용하였습니다!
+
+---
+
+## Using Pakage - ParseDownExtra
+
+**Note** To make lists look nice, you can wrap items with hanging indents:
+
+    -   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+        viverra nec, fringilla in, laoreet vitae, risus.
+    -   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+        Suspendisse id sem consectetuer libero luctus adipiscing.
+EOT;
+
+    return app(ParsedownExtra::class)->text($text);
+    # app() 헬퍼 함수는 new ParsedownExtra() 와 같은 역할을 한다.
+    # 의존성 주입에 용이하여 app()을 사용하는 것이 좋음!
+    # * 참고 : 라라벨 공식문서 - Service Container
+});
+
 /*
 
 - Route::[Method]('[Resource', function() {[this is call back function]});
