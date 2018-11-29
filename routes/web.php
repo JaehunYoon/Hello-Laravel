@@ -134,6 +134,17 @@ Route::get('posts/create', function () {
     return view('posts/create');
 });
 
+# Exception
+
+Route::get('/excepts', function () {
+    abort('403');
+});
+
+# Custom Exception Render
+
+Route::get('/excepts/mnf', function () {
+    return App\Post::findOrFail(100);
+});
 
 /*
 
